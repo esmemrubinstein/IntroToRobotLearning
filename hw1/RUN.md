@@ -29,7 +29,7 @@ n_iter = 10
 n_layers: 3
 learning_rate: 5e-3 
 ```
-After generated the outputs for 2 environments, there is another block in the ipynb file with the comment "Code to create dagger vs expert vs bc plot for ant and another environment" that can be used to create the plot for the DAgger vs BC vs Expert.
+After generated the outputs for 2 environments, there is another block in the ipynb file with the comment "Code to create dagger vs expert vs bc plot for ant and another environment" that can be used to create the plot for the DAgger vs BC vs Expert.  The paths for the output can be put into variables `ant_events_file` and `humanoid_events_file`.
 
 
 
