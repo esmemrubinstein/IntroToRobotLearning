@@ -13,10 +13,10 @@ max_replay_buffer_size = 1000000
 n_layers = 5 
 size = 64 
 learning_rate = 4e-3
-video_log_freq = -1 #@param 
-scalar_log_freq = 1 #@param 
-no_gpu = False #@param 
-which_gpu = 0 #@param 
+video_log_freq = -1 
+scalar_log_freq = 1 
+no_gpu = False 
+which_gpu = 0 
 seed = 1 
 ```
 
