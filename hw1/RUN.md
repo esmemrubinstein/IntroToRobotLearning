@@ -4,7 +4,7 @@ In Section 1.2, to get the expert results for the five environments, the followi
 
 ```
 ep_len = 1000 
-num_agent_train_steps_per_iter = 2500 
+num_agent_train_steps_per_iter = 1900 
 n_iter = 1
 batch_size = 1000 
 eval_batch_size = 5000 
@@ -25,11 +25,10 @@ In Section 1.3, keep the same parameters as above except for the `num_agent_trai
 In Section 2.2, use the following parameters (all not listed match above):
 
 ```
-n_iter = 10
+n_iter = 8
 n_layers: 3
-learning_rate: 5e-3 
 ```
-After generated the outputs for 2 environments, there is another block in the ipynb file with the comment "Code to create dagger vs expert vs bc plot for ant and another environment" that can be used to create the plot for the DAgger vs BC vs Expert.  The paths for the output can be put into variables `ant_events_file` and `humanoid_events_file`.
+After generated the outputs for 2 environments, there is another block in the ipynb file with the comment "Code to create dagger vs expert vs bc plot for ant and another environment" that can be used to create the plot for the DAgger vs BC vs Expert.  The paths for the output can be put into variables `ant_events_file` and `h_events_file`.
 
 
 
