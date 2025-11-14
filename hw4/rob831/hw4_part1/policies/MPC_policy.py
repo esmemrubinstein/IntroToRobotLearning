@@ -57,10 +57,12 @@ class MPCPolicy(BasePolicy):
                                                         size=(num_sequences, horizon, self.ac_dim))
             return random_action_sequences
         elif self.sample_strategy == 'cem':
-            # TODO(Q5): Implement action selection using CEM.
+            # DONE(Q5): Implement action selection using CEM.
             # Begin with randomly selected actions, then refine the sampling distribution
             # iteratively as described in Section 3.3, "Iterative Random-Shooting with Refinement" of
             # https://arxiv.org/pdf/1909.11652.pdf 
+            elite_mean = None
+            elite_std = None
             for i in range(self.cem_iterations):
                 # - Sample candidate sequences from a Gaussian with the current 
                 #   elite mean and variance
@@ -70,10 +72,23 @@ class MPCPolicy(BasePolicy):
                 #     (Hint: what existing function can we use to compute rewards for
                 #      our candidate sequences in order to rank them?)
                 # - Update the elite mean and variance
-                pass
+                if i == 0:
+                    actions = np.random.uniform(low=self.low, high=self.high,
+                                                size=(num_sequences, horizon, self.ac_dim))
+                    elite_mean = np.mean(actions, axis=0)
+                    elite_std = np.std(actions, axis=0)
+                else:
+                    actions = np.random.normal(loc=elite_mean, scale=elite_std,
+                                               size=(num_sequences, horizon, self.ac_dim))
+                
+                predicted_rewards = self.evaluate_candidate_sequences(actions, obs)
+                elite_indices = np.argsort(predicted_rewards)[-self.cem_num_elites:]
+                elite_actions = actions[elite_indices]
+                elite_mean = self.cem_alpha * np.mean(elite_actions, axis=0) + (1 - self.cem_alpha) * elite_mean
+                elite_std = self.cem_alpha * np.std(elite_actions, axis=0) + (1 - self.cem_alpha) * elite_std
 
-            # TODO(Q5): Set `cem_action` to the appropriate action chosen by CEM
-            cem_action = None
+            # DONE(Q5): Set `cem_action` to the appropriate action chosen by CEM
+            cem_action = elite_mean
 
             return cem_action[None]
         else:
